@@ -50,8 +50,9 @@ int main(void) {
   fclose(file);
     
     char query[100];
+    printf("Enter CPU Name (full string): ");
     scanf("%[^\n]", query);
-    printf("Looking for %s\n", query);
+    printf("Processing..\n", query);
 
     int i;
 
