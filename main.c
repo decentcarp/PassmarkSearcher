@@ -49,15 +49,16 @@ int main(void) {
   
   fclose(file);
     
+
     char query[100];
-    printf("Enter CPU Name (full string): ");
+    printf("Enter CPU Name: ");
     scanf("%[^\n]", query);
-    printf("Processing..\n", query);
+    printf("Querying passmark.txt..\n", query);
 
     int i;
 
     for (i = 0; i < numberofcpus; i++) {
-        if (strcmp(cpuspecs[i].cpuname, query) == 0) {
+        if (strstr(cpuspecs[i].cpuname, query) != NULL) {
             printf("CPU Name: %s\n", cpuspecs[i].cpuname);
             printf("Cores: %d\n", cpuspecs[i].cores);
             printf("Single Thread Performance: %dpts\n", cpuspecs[i].single);
@@ -66,8 +67,10 @@ int main(void) {
             printf("Socket: %s\n", cpuspecs[i].socket);
             printf("Type: %s\n", cpuspecs[i].type);
             break;
-        }
-    }
+      }
+    }       
+    
+    return 0;
+     
+  }
 
-  return 0;
-}
