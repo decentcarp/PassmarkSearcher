@@ -20,11 +20,11 @@ int main(void) {
   file = fopen("passmark.txt", "r");
 
   if (file == NULL) {
-    printf("broken :C");
+    printf("I couldn't find that file :C");
     return 1;
   }
 
-  CPUSpecs cpuspecs[7000];
+  CPUSpecs cpuspecs[6224];
 
   int readvalues = 0;
   int numberofcpus = 0;
@@ -38,12 +38,12 @@ int main(void) {
          &cpuspecs[numberofcpus].tdp,
          cpuspecs[numberofcpus].socket,
          cpuspecs[numberofcpus].type)) == 7) {
-  if (numberofcpus >= 7000) break;
+  if (numberofcpus >= 6224) break;
   numberofcpus++;
 }
   
   if (readvalues != EOF) { 
-      printf("meow"); 
+      printf("The database is not formatted correctly :C\n"); 
       return 1;
  }
   
@@ -56,15 +56,15 @@ int main(void) {
 
     int i;
 
-    for (i = 0; i < 6222; i++) {
+    for (i = 0; i < numberofcpus; i++) {
         if (strcmp(cpuspecs[i].cpuname, query) == 0) {
             printf("CPU Name: %s\n", cpuspecs[i].cpuname);
             printf("Cores: %d\n", cpuspecs[i].cores);
-            printf("Single Thread Performance: %d\n", cpuspecs[i].single);
-            printf("Multi Thread Performance: %d\n", cpuspecs[i].multi);
-            printf("TDP: %.2fW\n", cpuspecs[i].tdp);
+            printf("Single Thread Performance: %dpts\n", cpuspecs[i].single);
+            printf("Multi Thread Performance: %dpts\n", cpuspecs[i].multi);
+            printf("TDP: %.1fW\n", cpuspecs[i].tdp);
             printf("Socket: %s\n", cpuspecs[i].socket);
-            printf("Desktop/Mobile: %s\n", cpuspecs[i].type);
+            printf("Type: %s\n", cpuspecs[i].type);
             break;
         }
     }
