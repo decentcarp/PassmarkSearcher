@@ -15,12 +15,13 @@ typedef struct
 
 int main(void) {
 
+  printf("\n[ PassmarkSearcher by Eleanor (decentcarp) ]\n\n");
   FILE *file;
 
   file = fopen("passmark.txt", "r");
 
   if (file == NULL) {
-    printf("I couldn't find that file :C");
+    printf("I couldn't find the specified database file :C");
     return 1;
   }
 
@@ -43,7 +44,7 @@ int main(void) {
 }
   
   if (readvalues != EOF) { 
-      printf("The database is not formatted correctly :C\n"); 
+      printf("The database file is not formatted correctly :C\n"); 
       return 1;
  }
   
@@ -51,9 +52,8 @@ int main(void) {
     
 
     char query[100];
-    printf("Enter CPU Name: ");
+    printf("Enter CPU Name (approximate or exact): ");
     scanf("%[^\n]", query);
-    printf("Querying passmark.txt..\n", query);
 
     int i;
     int i2 = 0; 
@@ -75,13 +75,17 @@ int main(void) {
         }
         continue;
       } 
+      if (i2 == 0 && i == numberofcpus - 1) {
+          printf("No CPU matches '%s' :C\n", query);
+          return 1;
+      }
     }
 
-  printf("Please select a CPU:\n");
+  printf("\nPlease select a CPU: ");
   scanf("%d", &i3);
 
   int i6 = i4[i3 - 1];
-  printf("CPU Name: %s\n", cpuspecs[i6].cpuname);
+  printf("\nCPU Name: %s\n", cpuspecs[i6].cpuname);
   printf("Cores: %d\n", cpuspecs[i6].cores);
   printf("Single Thread Performance: %dpts\n", cpuspecs[i6].single);
   printf("Multi Thread Performance: %dpts\n", cpuspecs[i6].multi);
