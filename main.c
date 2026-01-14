@@ -56,21 +56,38 @@ int main(void) {
     printf("Querying passmark.txt..\n", query);
 
     int i;
+    int i2 = 0; 
+    int i3;
+  
+    #define MAX_RESULTS 10
+    int i4[MAX_RESULTS];
+    char results[MAX_RESULTS][256];
+
+    for (int i5 = 0; i5 < MAX_RESULTS; i5++) i4[i5] = -1;
 
     for (i = 0; i < numberofcpus; i++) {
-        if (strstr(cpuspecs[i].cpuname, query) != NULL) {
-            printf("CPU Name: %s\n", cpuspecs[i].cpuname);
-            printf("Cores: %d\n", cpuspecs[i].cores);
-            printf("Single Thread Performance: %dpts\n", cpuspecs[i].single);
-            printf("Multi Thread Performance: %dpts\n", cpuspecs[i].multi);
-            printf("TDP: %.1fW\n", cpuspecs[i].tdp);
-            printf("Socket: %s\n", cpuspecs[i].socket);
-            printf("Type: %s\n", cpuspecs[i].type);
-            break;
-      }
-    }       
-    
-    return 0;
-     
-  }
+      if (strstr(cpuspecs[i].cpuname, query) != NULL) {
+        if (i2 < MAX_RESULTS) {
+          strcpy(results[i2], cpuspecs[i].cpuname);
+          printf("%d: %s\n", i2 + 1, cpuspecs[i].cpuname);
+          i4[i2] = i;
+          i2++;
+        }
+        continue;
+      } 
+    }
 
+  printf("Please select a CPU:\n");
+  scanf("%d", &i3);
+
+  int i6 = i4[i3 - 1];
+  printf("CPU Name: %s\n", cpuspecs[i6].cpuname);
+  printf("Cores: %d\n", cpuspecs[i6].cores);
+  printf("Single Thread Performance: %dpts\n", cpuspecs[i6].single);
+  printf("Multi Thread Performance: %dpts\n", cpuspecs[i6].multi);
+  printf("TDP: %.1fW\n", cpuspecs[i6].tdp);
+  printf("Socket: %s\n", cpuspecs[i6].socket);
+  printf("Type: %s\n", cpuspecs[i6].type);
+
+  return 0;
+}
