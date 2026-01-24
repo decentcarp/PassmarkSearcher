@@ -66,7 +66,7 @@ int main(void) {
     for (int i5 = 0; i5 < MAX_RESULTS; i5++) i4[i5] = -1;
 
     for (i = 0; i < numberofcpus; i++) {
-      if (strstr(cpuspecs[i].cpuname, query) != NULL) {
+      if (strcasestr(cpuspecs[i].cpuname, query) != NULL) {
         if (i2 < MAX_RESULTS) {
           strcpy(results[i2], cpuspecs[i].cpuname);
           printf("%d: %s\n", i2 + 1, cpuspecs[i].cpuname);
